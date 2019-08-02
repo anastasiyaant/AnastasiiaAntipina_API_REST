@@ -1,7 +1,9 @@
 package service;
 
+import Enums.ErrorCodes;
 import dto.YandexSpellerDTO;
-import static org.testng.Assert.assertTrue;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestYandexSpellerAssertions {
     private YandexSpellerDTO[] words;
@@ -11,9 +13,16 @@ public class RestYandexSpellerAssertions {
     }
 
     public RestYandexSpellerAssertions verifyWord(String expectedWord) {
-        assertTrue(words[0].getS().contains(expectedWord));
+        assertThat(expectedWord).isNotEmpty();
+        assertThat(words[0].getS()).contains(expectedWord);
         return this;
     }
 
+    public static void verifyErrorCode(YandexSpellerDTO[] texts, ErrorCodes expectedText) {
+        assertThat(texts[0].getCode()).isEqualTo(expectedText.getItem());
+    }
 
+    public void verifySize() {
+        assertThat(words).isEmpty();
+    }
 }

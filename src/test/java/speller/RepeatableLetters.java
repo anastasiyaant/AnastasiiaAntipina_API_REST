@@ -5,10 +5,7 @@ import dto.YandexSpellerDTO;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import service.RestYandexSpellerAssertions;
-import service.RestYandexSpellerService;
 import service.RestYandexSpellerSteps;
-
-import java.util.List;
 
 public class RepeatableLetters {
 
@@ -24,8 +21,10 @@ public class RepeatableLetters {
     }
 
     @Test(dataProvider = "repeatableLettersWordsData")
-    public void checkRepeatableLetters(String word,String expectedWord){
-        YandexSpellerDTO[] words = RestYandexSpellerSteps.getCorrectWord(word, Options.NO_OPTIONS);
+    public void checkRepeatableLetters(String word, String expectedWord) {
+        YandexSpellerDTO[] words = RestYandexSpellerSteps.getCorrectText(word, Options.NO_OPTIONS);
         new RestYandexSpellerAssertions(words).verifyWord(expectedWord);
     }
+
+
 }
